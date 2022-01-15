@@ -1,0 +1,53 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+	],
+	"settings": {
+		"eslint.validate": [
+			"vue",
+			"javascript",
+			"typescript",
+			"javascriptreact"
+		],
+		// "eslint.validate": [
+		// 	{
+		// 		"language": "vue",
+		// 		"autoFix": true
+		// 	},
+		// 	{
+		// 		"language": "javascript",
+		// 		"autoFix": true
+		// 	},
+		// 	{
+		// 		"language": "typescript",
+		// 		"autoFix": true
+		// 	},
+		// 	{
+		// 		"language": "javascriptreact",
+		// 		"autoFix": true
+		// 	}
+		// ],
+		// "eslint.autoFixOnSave": true,
+		// "editor.formatOnSave": false,
+		"vetur.validation.template": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"cSpell.words": [
+			"firstname",
+			"fullname",
+			"lastname",
+			"Vuex"
+		],
+		"editor.renameOnType": true
+	},
+	"extensions": {
+		"recommendations": [
+			"dbaeumer.vscode-eslint",
+			"octref.vetur",
+			"lauren.vue-pack"
+		]
+	}
+}
