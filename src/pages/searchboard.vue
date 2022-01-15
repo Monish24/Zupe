@@ -105,6 +105,19 @@
                         </div>
                     </div>
                 </div>
+                                <div class="albms-grid">
+                    <div class="albms-card">
+                        <div class="albm-img">
+                            <img src="https://i.scdn.co/image/ab67616d00001e02fbc71c99f9c1296c56dd51b6" height="250px" width="250px" alt="">
+                        </div>
+                        <div class="albm-info">
+                            Nevermind - EP  
+                            <div class="albm-art-subtext">
+                                Nirvana
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             </div>     
         </div>
