@@ -36,6 +36,7 @@ export default class sidebar2 extends Vue {
     height: 879px;
     top: 0px;
     right: 0px;
+    z-index: 3;
     transition: transform 600ms ease-in-out;
 }
 

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="wrap">
+  <div class="bg">
     <div class="top-section">
       <div class="titles">
         <div class="title-zupe">
@@ -182,11 +183,14 @@
       </div>
     </div> 
   </div>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from "vue-property-decorator";
+
+
 var AUTH_URL = "https://accounts.spotify.com/authorize?client_id=a1602b112de54d6ca8f0cdc51a1f831f&response_type=code&redirect_uri=http://localhost:8080/callback&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
 
 @Component({
@@ -194,18 +198,9 @@ var AUTH_URL = "https://accounts.spotify.com/authorize?client_id=a1602b112de54d6
 })
 
 export default class Home extends Vue{
+
   private spotifylogin(){
     window.location.assign(AUTH_URL);
-  }
-  private searchTrack(){
-    try {
-        fetch('http://localhost:3000/api/searchTrack', {
-            method: 'GET',
-            headers: { "Content-Type": "application/json" },
-        }).then(response => response.json()).then(data => console.log(data)).catch(err => console.error(err));
-        } catch (e) {
-        console.log(e)
-}
   }
 }
 
@@ -218,6 +213,11 @@ export default class Home extends Vue{
   font-family: "spoof";
   src: url("../assets/Spoof-Regular.ttf");
   font-weight: 200;
+}
+
+.bg{
+  height: 5000px;
+  background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
 }
 
 .title-zupe{

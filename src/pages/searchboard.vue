@@ -1,23 +1,21 @@
 <template>
     <div>
         <div class="searchbar">
-            <input v-model="searchQuery" v-on:keyup.enter="search" class="searchinput" placeholder="Search Songs, Artists, Albums ...">
+            <input v-model="searchQuery" v-on:input="search" class="searchinput" placeholder="Search Songs, Artists, Albums ...">
             <button @click="search" class="searchbtn"><img class="inpboximg" src="@/assets/img/search.png" alt=""></button>
         </div>
         <div class="search-page-container"> 
-            <div class="partiton-left"></div>
+            <img class="img-bg" src="@/assets/img/zupe_Back.png" width="1859px" height="830px"  alt="">
+        <div class="partiton-left"></div>
         <div class="partition-right"></div>
-        <div class="searched-content-container">
+        <div class="searched-content-container" v-if="results.length">
             <div class="top-results-container">
                 <div class="searched-c-title">
                     Top Results
                 </div>
-
-                
                 <div class="tr-container">
-
                     <!-- Loop this -->
-                    <div class="tr-card" v-for="(res, index) in results" :key="res.uri">
+                    <div class="tr-card" v-for="(res, index) in results" :key="res.uri" @click="playthissong(res.name,res.artists[0].name,res.id)">
                         <div class="tr-inner-card" v-if="index < 3">
                            <img :src="res.album.images[1].url" height="138px" width="138px" alt="">
                         </div>
@@ -40,12 +38,13 @@
                     Artists
                 </div>
                 <div class="art-container">
-                    <div class="art-card">
+                    <div class="art-card" v-for="(res) in resultsArtists" :key="res.uri" @click="displayartistPls(res.id)">
                         <div class="art-image-container">
-                            <img src="https://i.scdn.co/image/ab67616d00001e02fbc71c99f9c1296c56dd51b6" height="138px" width="138px" alt="">
+                            <img v-if="res.images[0] && res.images[0].url" :src="res.images[0].url" width="138px" height="138px" alt="">
+                            <img v-else src="@/assets/img/placeholder.png" width="138px" height="138px" alt="">
                         </div>
                         <div class="name-artist">
-                            Nirvana
+                            {{ res.name }}
                         </div>
                     </div>
                 </div>
@@ -55,15 +54,15 @@
                     Songs
                 </div>
                 <div class="songs-grid">
-                    <div class="searched-song-card" v-for="(res, index) in results" :key="res.uri" v-if="index >= 3">
+                    <div class="searched-song-card" v-for="(res, index) in results" :key="res.uri" v-if="index >= 3" @click="playthissong(res.name,res.artists[0].name,res.id)">
                         <div class="sng-img-container">
-                            <img :src="res.album.images[1].url" height="40px" width="40px" alt="">
+                            <img :src="res.album.images[0].url" height="40px" width="40px" alt="">
                         </div>
                         <div class="songinf-sng">
                             <div class="name-sng">
                                 {{ res.name }}
                                 <div class="artist-sng">
-                                    {{ res.artists[0].name }} • {{ res.album.name }}
+                                    {{ res.artists[0].name }} 
                                 </div>
                             </div> 
                         </div>
@@ -75,14 +74,14 @@
                     Albums
                 </div>
                 <div class="albms-grid">
-                    <div class="albms-card">
+                    <div class="albms-card" v-for="res in resultsAlbums" :key="res.uri" @click="displaythisPls(res.id)">
                         <div class="albm-img">
-                            <img src="https://i.scdn.co/image/ab67616d00001e02fbc71c99f9c1296c56dd51b6" height="250px" width="250px" alt="">
+                            <img :src="res.images[0].url" height="250px" width="250px" alt="">
                         </div>
                         <div class="albm-info">
-                            Nevermind - EP  
+                            {{ res.name }} - {{ res.album_type }}
                             <div class="albm-art-subtext">
-                                Nirvana
+                                {{ res.artists[0].name }}
                             </div>
                         </div>
                     </div>
@@ -93,14 +92,14 @@
                     Playlists
                 </div>
                 <div class="albms-grid">
-                    <div class="albms-card">
+                    <div class="albms-card" v-for="res in resultsPlaylists" :key="res.uri" @click="displaylistPls(res.id)">
                         <div class="albm-img">
-                            <img src="https://i.scdn.co/image/ab67616d00001e02fbc71c99f9c1296c56dd51b6" height="250px" width="250px" alt="">
+                            <img :src="res.images[0].url" height="250px" width="250px" alt="">
                         </div>
                         <div class="albm-info">
-                            Nevermind - EP  
+                            {{ res.name }}   
                             <div class="albm-art-subtext">
-                                Nirvana
+                                {{ res.owner.display_name }}
                             </div>
                         </div>
                     </div>
@@ -113,6 +112,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { vxm } from "@/store";
 import { Component } from 'vue-property-decorator';
 
 @Component({
@@ -122,9 +122,12 @@ import { Component } from 'vue-property-decorator';
 export default class searchboard extends Vue{
     private searchQuery=""
     private results=[]
-    private postsearch=""
-
+    private resultsArtists=[]
+    private resultsAlbums=[]
+    private resultsPlaylists=[]
+    
     private async search(){
+        if(this.searchQuery){
         await fetch('http://localhost:3000/api/sendquery', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -132,16 +135,6 @@ export default class searchboard extends Vue{
                 searchQuery: this.searchQuery
             })
         })
-
-        // try {
-        // await fetch('http://localhost:3000/api/searchTrack', {
-        //     method: 'GET',
-        //     headers: { "Content-Type": "application/json" },
-        // }).then(response => response.json()).then((data) => {this.results = data; console.log(this.results)}).catch(err => console.error(err));
-        // } catch (e) {
-        // console.log(e)
-        // }
-
         try {
             const tmp = await fetch('http://localhost:3000/api/searchTrack', {
                 method: 'GET',
@@ -154,8 +147,86 @@ export default class searchboard extends Vue{
         } catch (e) {
             console.log(e)
         }
-        // this.postsearch=``
+
+        try {
+            const tmp = await fetch('http://localhost:3000/api/searchArtists', {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" },
+            })
+
+            this.resultsArtists = await tmp.json()
+            console.log(this.resultsArtists)
+
+        } catch (e) {
+            console.log(e)
+        }
+        
+        try {
+            const tmp = await fetch('http://localhost:3000/api/searchAlbums', {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" },
+            })
+
+            this.resultsAlbums = await tmp.json()
+            console.log(this.resultsAlbums)
+
+        } catch (e) {
+            console.log(e)
+        }
+
+        try {
+            const tmp = await fetch('http://localhost:3000/api/searchPlaylists', {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" },
+            })
+
+            this.resultsPlaylists = await tmp.json()
+            console.log(this.resultsPlaylists)
+
+        } catch (e) {
+            console.log(e)
+        }}
     } 
+    private async displaythisPls(id:string){
+        console.log(id)
+        this.$router.push({ path: `/albumdisplay/${id}` })
+    }
+    private async displaylistPls(id2:string){
+        console.log(id2)
+        this.$router.push({ path: `/playlistdisplay/${id2}` })
+    }
+    private async displayartistPls(id3:string){
+        console.log(id3)
+        this.$router.push({ path: `/artistdisplay/${id3}` })
+    }
+    private async playthissong(songname:string,songartist:string,songid:string){
+        const tmp = await fetch('http://localhost:3000/api/playalbumsong', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              songname: songname,
+              songartist: songartist,
+              songid: songid
+            })
+        })
+        const vid = await tmp.json()
+        console.log(vid)
+        vxm.playerStore.videoID = vid
+
+          try {
+            const tmp = await fetch('http://localhost:3000/api/getsongid', {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" },
+            })
+
+            const ressonginfo = await tmp.json()
+            console.log(ressonginfo)
+            vxm.playerStore.songINFO=ressonginfo
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 </script>
 
@@ -179,7 +250,11 @@ body{
     height: 830px;
     position: relative;
     left: 22px;
-    top: 40px;
+    top: 70px;
+}
+
+.img-bg{
+    position: fixed;
 }
 
 /* .partition-left{
@@ -210,7 +285,7 @@ body{
     border-radius: 500px;
     border: none;
     padding-left: 10px;
-    z-index: 1;
+    z-index: 0;
     caret-color: white;
 }
 
@@ -240,6 +315,7 @@ input:focus::placeholder {
 }
 
 .searched-content-container{
+    margin-bottom: 50px !important;
     display: flex;
     flex-direction: column;
     gap: 34px;
@@ -247,6 +323,7 @@ input:focus::placeholder {
     height: 1500px;
     position: relative;
     left: 217px;
+    z-index: 1;
 }
 
 .top-results-container{
@@ -279,7 +356,11 @@ input:focus::placeholder {
     height: 152px;
     padding-left: 20px;
     padding-top: 21px;
+    transition: 0.1s linear;
+}
 
+.tr-card:hover{
+    color: #ffeea9;
 }
 
 .tr-inner-card{
@@ -291,7 +372,9 @@ input:focus::placeholder {
 }
 
 .tr-card-info{
-    padding-top: 30px;
+    user-select: none;
+    display: table-cell;
+    vertical-align: middle;
     width: 275px;
     height: 100px;
     position: relative;
@@ -321,6 +404,7 @@ input:focus::placeholder {
 }
 
 .art-container{
+    overflow: hidden;
     position: relative;
     left: 20px;
     display: flex;
@@ -340,7 +424,13 @@ input:focus::placeholder {
     width: 138px;
     height: 138px;
     border-radius: 50%;
+    transition: 0.1s linear;
 }
+
+.art-image-container:hover{
+    filter: blur(3px);
+}
+
 .name-artist{
     font-size: 13px;
     text-align: center;
@@ -369,6 +459,11 @@ input:focus::placeholder {
     height: 60px;
     padding-top: 10px;
     padding-left: 10px;
+    transition: 0.1s linear;
+}
+
+.searched-song-card:hover{
+    color: #ffeea9;
 }
 
 .sng-img-container{
@@ -378,7 +473,12 @@ input:focus::placeholder {
     height: 40px;
 }
 
+.sng-img-container:hover{
+    filter: blur(1px);
+}
+
 .songinf-sng{
+    user-select: none;
     position: relative;
     width: 290px;
     top: -37px;
@@ -395,6 +495,7 @@ input:focus::placeholder {
 }
 
 .searched-albums-container{
+    overflow: hidden;
     border-bottom: solid #3f3a50 1px;
     display: flex;
     flex-direction: column;
@@ -417,12 +518,18 @@ input:focus::placeholder {
     height: 280px;
 }
 
+.albm-img:hover{
+    filter: blur(5px);
+}
+
 .albm-img{
     overflow: hidden;
     border-radius: 8px;
     width: 250px;
     height: 250px;
+    transition: 0.1s linear;
 }
+
 
 .albm-art-subtext{
     opacity: 0.7;
@@ -430,6 +537,7 @@ input:focus::placeholder {
 }
 
 .searched-playlists-container{
+    margin-top: -20px !important;
     display: flex;
     flex-direction: column;
     gap: 10px;

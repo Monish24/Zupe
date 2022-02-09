@@ -57,10 +57,12 @@
             </div>
             <div class="library-subcontainer">
                 <div class="Home">
+                <router-link style="text-decoration: none; color: inherit;" to='/dashboard'>
                     <span class="img-home">
                         <img src="@/assets/img/Home0.png">
                     </span>
                     <b>Home</b>
+                </router-link>
                 </div>
                 <div class="Library">
                     <span class="img-library">
@@ -82,29 +84,28 @@
                     </span>
                     <b>Create Playlist</b>
                 </div>
-                <div class="FriendsPlaylists">
-                    <span class="img-fp">
-                        <img src="@/assets/img/friendsplaylists.png">
-                    </span>
-                    <b>Friend's Playlists</b>
-                </div>
+
             </div>
             <div class="sidebar1">
-                <transition name="fade">
+                <router-link style="text-decoration: none; color: inherit;" to='/dashboard'>
+                <transition name="fade">               
                     <span v-if="showImage" class="img-homesb" key="1">
                         <img src="@/assets/img/Home0.png">
                     </span>
                 </transition>
+                </router-link>
                 <transition name="fade">
                     <span v-if="showImage" class="img-librarysb" key="2">
                         <img src="@/assets/img/library.png">
                     </span>
                 </transition>
+                <router-link style="text-decoration: none; color: inherit;" to='/searchboard'>
                 <transition name="fade">
                     <span v-if="showImage" key="3" class="img-searchsb" >
                         <img  src="@/assets/img/search.png">
-                    </span>
+                    </span>              
                 </transition>
+                </router-link>
                 <input class="toggleOpencb" @click="toggleOpen" v-model="sidebar1cb" type="checkbox" id="cb1">
                 <input type="text" v-model="openclose" placeholder="Open" class="toggleOpen">
             </div>
@@ -148,6 +149,7 @@ export default class sidebar1 extends Vue {
     position: fixed;
     top: 0px;
     left: 0px;
+    z-index: 3;
     transition: transform 600ms ease-in-out;
 }
 
@@ -203,7 +205,7 @@ export default class sidebar1 extends Vue {
     width: 5px;
 }
 ::-webkit-scrollbar-track{
-    background: transparent;
+    background: #292534;
 }
 ::-webkit-scrollbar-thumb{
     background: #d284ff;
@@ -281,7 +283,7 @@ export default class sidebar1 extends Vue {
     width:220px;
     height: 40px;
     position: relative;
-    top: 60px;
+    top: 100px;
     right: 3px;
 }
 
@@ -350,8 +352,9 @@ export default class sidebar1 extends Vue {
     opacity: 0.6;
     position: fixed;
     left: 20px;
-    top: 186px;
+    top: 226px;
 }
+
 .img-fp{
     width: 200px;
     height: 30px;

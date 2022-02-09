@@ -5,6 +5,8 @@ import router from "@/router/index";
 import { store } from "@/store";
 import "@/assets/css/styles.scss";
 import "@/plugins/fitty"
+import "@/plugins/cookies"
+import "@/plugins/vuecarousel"
 
 
 

@@ -1,42 +1,86 @@
 <template>
+<div class="wrapp">
     <div class="content-container">
-            <div class="search-box-art">
-                <input class="searchinput" v-model="searchQuery" v-on:keyup.enter="searchart" type="text" placeholder="Search for genres...">
-                <button @click="searchart" class="searchbtn"></button>
-                <img class="sboximg" src="@/assets/img/search.png" alt="">
-            </div>
             <div class="slct-art-container">
                 <div class="slct-3-art-text">
                     Select 3 of your favorite genres
                 </div>
-                <div class="slct-art-card-container">
-                    <div class="sart-card" v-for="(res) in resultsArtists" :key="res">
-                        <div class="sart-img">
-                            <img v-if="res.images[0] && res.images[0].url" :src="res.images[0].url" width="150px" height="150px" alt="">
-                            <img v-else src="@/assets/img/placeholder.png" width="150px" height="150px" alt="">
-                        </div>   
-                       <div class="sart-text">
-                           {{ res.name }}
-                        </div>                
+                <div class="slct-genre-card-container">
+                    <div class="sgenre-card" :style="[ selectedgenre.indexOf(genre) !== -1 ? { 'background' : 'yellow', 'border' : '2px black solid'}  : {  }]" v-for="genre in results.genres" :key="genre">  
+                       <label class="sgenre-text">
+                           {{ genre }}
+                       </label>
+                        <input class="cbgenre" v-bind:value="genre" :disabled="selectedgenre.length > 2 && selectedgenre.indexOf(genre) === -1" v-model="selectedgenre" type="checkbox" :refs="genre">             
                     </div>
                 </div>
             </div>
-            <router-link style="text-decoration: none; color: inherit;" to='/albumsselect'>
-            <button class="next-btn">Next</button>
-            </router-link>
-            <div class="nbtn-shadow"></div>
+            <button class="next-btn" @click="next" v-if="selectedgenre.length > 2">Next</button>
+            <div class="nbtn-shadow" v-if="selectedgenre.length > 2"></div>
+        </div>
         </div>
 </template>
 
 <script lang="ts">
+import { vxm } from "@/store";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component({
-  
 })
 
 export default class genreselect extends Vue{
+    private uid=''
+    private u = vxm.playerStore.umail
+    private p = vxm.playerStore.upass
+    async mounted(){
+        try {
+        const tmp = await fetch('http://localhost:3000/auth/login', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username: this.u,
+                password: this.p
+            })
+        })
+
+        this.uid = await tmp.json()
+        console.log(this.uid)
+        } catch (e) {
+        console.log(e)
+        }
+        vxm.playerStore.uid = this.uid
+    }
+    private async next(){
+    this.uid = vxm.playerStore.uid
+    console.log(this.uid)
+    try {
+        const tmp = await fetch('http://localhost:3000/api/uidinit2', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                uid: this.uid
+            })
+        })
+        } catch (e) {
+        console.log(e)
+        }
+        this.$nextTick(() => {
+            try {
+            fetch('http://localhost:3000/api/genre', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                favgenres: this.selectedgenre,
+                uid: "30d09554-b785-483c-a253-223474c994a7"
+            })
+        })
+        } catch (e) {
+        console.log(e)
+        }
+        })
+        this.$router.push('/artistsselect')
+    }
+    private selectedgenre=[]
     private results ={
     "genres": [
         "acoustic",
@@ -187,6 +231,12 @@ body{
     background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
 }
 
+.wrapp{
+    height: 969px;
+    width: 100%;
+    background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
+}
+
 .content-container{
     overflow: hidden;
     position: relative;
@@ -211,34 +261,52 @@ body{
     text-align: center;
 }
 
-.slct-art-card-container{
+.slct-genre-card-container{
+    margin-top: 10px !important;
     overflow-y: scroll;
     overflow-x: hidden !important;
     display: grid;
-    grid-template-columns: repeat(5, 194px);
-    grid-template-rows: repeat(3,235px);
+    grid-auto-flow: row;
+    row-gap: 20px   ;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 37px;
     width: 970px;
     height: 650px;
     padding-top: 24px;
     padding-left: 24px;
 }
 
-.sart-card{
-    width: 150px;
-    height: 200px;
+.sgenre-card{
+    text-align: center;
+    border-radius: 4px;
+    background-color: rgb(214, 214, 214);
+    padding-top: 30px;
+    width: 270px;
+    height: 50px;
+    z-index: 1;
 }
 
-.sart-img{
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    border-radius: 50%;
+.sgenre-card:hover{
+    background-color: rgb(168, 168, 168);
 }
 
-.sart-text{
+.cbgenre{
+    position: relative;
+    top: -55px;
+    width: 270px;
+    height: 80px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    z-index: 2; 
+}
+
+.sgenre-text{
+    font-size: 20px;
     text-align: center;
     font-family: "spoof";
     color: black;
+    z-index: 0;
 }
 
 .searchinput{
@@ -347,5 +415,4 @@ input:focus::placeholder {
     height: 47px;
     z-index: 0;
 }
-
 </style>

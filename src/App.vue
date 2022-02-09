@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-
+import 'animate.css';
 
 @Component({
   name: "App",
@@ -21,7 +21,12 @@ export default class App extends Vue {
 }
 
 body{
-  background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
+  /* background: linear-gradient(to bottom, #D6E1ED, #DEE0F1); */
+  /* background: #2e2a3a; */
+  background: #2e2a3a;
+  /* overflow-y: hidden !important; */
 }
+
+* { margin: 0 !important; }
 </style>
 
