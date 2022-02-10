@@ -424,7 +424,7 @@ private pausesong(){
   border-radius: 4px;
   position: absolute;
   top: 490px;
-  left: 1240px;
+  left: 1540px;
   width: 300px;
   height: 400px;
   background: #ffeea949;
@@ -444,6 +444,7 @@ private pausesong(){
   backdrop-filter: blur(5px);
 }
 .queuecard-text{
+  user-select: none;
   text-overflow: ellipsis;
   font-size: 14px;
   padding-top: 4px;

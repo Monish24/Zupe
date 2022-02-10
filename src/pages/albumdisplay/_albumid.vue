@@ -331,7 +331,6 @@ body{
 }
 
 .bottom-container{
-  border: white 1px solid;
   overflow: scroll;
   overflow-x: hidden;
   height: 25.789vw;

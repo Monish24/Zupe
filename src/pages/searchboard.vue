@@ -8,6 +8,7 @@
             <img class="img-bg" src="@/assets/img/zupe_Back.png" width="1859px" height="830px"  alt="">
         <div class="partiton-left"></div>
         <div class="partition-right"></div>
+        <div class="wrrap">
         <div class="searched-content-container" v-if="results.length">
             <div class="top-results-container">
                 <div class="searched-c-title">
@@ -105,7 +106,8 @@
                     </div>
                 </div>
             </div>
-            </div>     
+            </div>
+        </div>     
         </div>
         </div>
 </template>
@@ -312,6 +314,11 @@ input:focus::placeholder {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+}
+
+.wrrap{
+    overflow: scroll;
+    width: 90vw;
 }
 
 .searched-content-container{

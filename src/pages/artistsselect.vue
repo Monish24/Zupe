@@ -168,7 +168,7 @@ export default class artistsselect extends Vue{
     padding-top: 24px;
     padding-left: 24px;
     width: 994px;
-    height: 200px;
+    height: 300px;
 }
 
 .sart-card{

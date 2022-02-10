@@ -264,7 +264,7 @@ async mounted(){
     grid-auto-flow: row;
     grid-template-columns: auto auto auto;
     grid-column-gap: 24px;
-    grid-row-gap: 24px;
+    grid-row-gap: 40px;
 }
 
 .outer-cont{
@@ -273,7 +273,7 @@ async mounted(){
     padding-top: 10px;
     padding-left: 10px;
     width: 200px;
-    height: 220px;
+    height: 230px;
 }
 
 .artistalbum-card{
