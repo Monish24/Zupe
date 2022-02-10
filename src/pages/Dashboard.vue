@@ -540,6 +540,17 @@ export default class Dashboard extends Vue{
   font-weight: 200;
 }
 
+@media screen and (max-width: 1000px) {
+    body{
+    overflow: scroll;
+}
+
+}
+
+body{
+    overflow: hidden;
+}
+
 img{
     user-select: none;
 }

@@ -377,21 +377,20 @@ input{
 .bg{
     font-family: "spoof";
     background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
-    width: 1920px;
-    height: 979px;
     z-index: 1;
+    display: flex;
+    @media screen and (0px <= width <= 1520px){
+        background-color: black;
+    }
 }
 
 .signup-info-container{
-    margin-bottom: -15px;
+    margin: 0px auto !important;
     display: flex;
     overflow: auto;
     background: white;
     width: 680px;
-    height: 986px;
-    position: relative;
-    top: -8px;
-    left: 566px;
+    height: 979px;
 }
 
 .inputboxes-container{

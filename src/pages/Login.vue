@@ -74,25 +74,23 @@ export default class Login extends Vue {
 }
 
 .bg{
-    height: 979px;
-    width: 100%;
     background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
 }
 .content-container{
     background-color: white;
     width: 680px;
-    height: 979px;
-    position: relative;
-    left: 586px;
+    height: 100vh;
+    margin: 0px auto !important;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 .inputboxes-container{
     display: flex;
     flex-direction: column;
     gap: 30px;
-    position: relative;
-    top: 270px;
-    left: 150px;
     width: 380px;
     height: 493px;
 }

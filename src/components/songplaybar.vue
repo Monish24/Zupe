@@ -8,16 +8,15 @@
       <div class="csong-text-box">
         <div class="csong-text"> <span v-if="ressonginfo">{{ressonginfo.name}}</span><span v-if="!ressonginfo"></span> <br> <span class="csong-subtext"><span v-if="ressonginfo" @click="openthisart(ressonginfo.artists[0].id)">{{ressonginfo.artists[0].name}}</span></span></div>
       </div>
-      <div class="prog-bar-box">
-        <div class="cpt">
+      <div class="cpt">
          <span v-if="currentpt != 0">{{ getTime(time) }}</span> 
         </div>
+      <div class="prog-bar-box">
+        
         <div id="progressbar">
           <div v-bind:style="{ width: currentpt + '%' }"></div> 
         </div>
-        <div class="dur">
-          <span v-if="duration != 0">{{ getTime(duration) }}</span>
-        </div>
+        
         <div class="prevskip">
         <img class="prevskipimg" src="@/assets/img/prevskip.png" height="40px" width="40px" @click="openqueue" alt="">
         </div>
@@ -25,10 +24,14 @@
           <img @click="playsong" v-if="!songplaying" src="@/assets/img/playbtnfilled.png" height="48px" width="48px" alt="">
           <img @click="pausesong" v-if="songplaying" src="@/assets/img/pausebtn.png" height="48px" width="48px" alt="">
         </div>
-      </div>
-      <div class="nextskip">
+        <div class="nextskip">
         <img class="nextskipimg" src="@/assets/img/nextskip.png" height="40px" width="40px" alt="" @click="nextsongplay">
       </div>
+      </div>
+      <div class="dur">
+          <span v-if="duration != 0">{{ getTime(duration) }}</span>
+      </div>
+      
       <div class="other-options-box">
         <div class="qiconimg">
         <img src="@/assets/img/queueicon.png" height="36px" width="36px" alt="" @click="openqueue">
@@ -238,12 +241,11 @@ private pausesong(){
   font-family: "spoof";
   display: flex;
   flex-direction: row;
-  width: 1920px;
+  width: 100vw;
   height: 90px;
   background: #17151c;
-  position: fixed;
-  top: 890px;
-  left: 0px;
+  position: absolute;
+  bottom: 0px;
   z-index: 30;
 }
 
@@ -282,90 +284,38 @@ private pausesong(){
 
 .prog-bar-box{
   margin-left: 10px !important;
-  width: 1000px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .other-options-box{
-  display: table-cell;
-  vertical-align: middle;
-  width: 520px;
-}
-
-#progressbar {
-  position: relative;
-  left: 130px;
-  top: 70px;
-  background-color: rgb(116, 116, 116) ;
-  border-radius: 13px;
-  width: 692px;
-}
-
-#progressbar>div {
-  background-color: #ffeea9;
-  height: 3px;
-  border-radius: 20px;
-}
-
-.playbuttonfilled{
-  position: relative;
-  left: 450px;
-  top: -40px;
-}
-
-.nextskip{
-  position: relative;
-  left: -430px;
-  top: 13px;
-  
-}
-
-.nextskipimg{
-  opacity: 0.7;
-  transition: 0.1s linear;
-}
-
-.nextskipimg:hover{
-  opacity: 1;
-}
-
-.prevskip{
-  position: relative;
-  left: 370px;
-  top: 10px;
-}
-
-.prevskipimg{
-  opacity: 0.7;
-  transition: 0.1s linear;
-}
-
-.prevskipimg:hover{
-  opacity: 1;
+  display: flex;
+  gap: 40px;
+  position: absolute;
+  right: 30px;
 }
 
 .qiconimg{
   position: relative;
-  top: 25px;
-  left: -50px;
+  top: 15px;
   z-index: 10000;
 }
 
 .volicon{
   position: relative;
-  top: 15px;
-  left: 330px;
+  left: 30px;
+  top: 10px;
 }
 
 .volumebtn{
   position: relative;
-  top: -40px;
-  left: 40px;
+  top: 5px;
 }
 
 #progressbar2 {
-  position: relative;
-  top: 13px;
-  left: 300px;
   background-color: rgb(116, 116, 116) ;
   border-radius: 13px;
   width: 102px;
@@ -383,22 +333,19 @@ private pausesong(){
 
 .cpt{
   color: white;
-  position: absolute;
-  top: 60px;
-  left: 450px;
+  position: relative;
+  top: 58px;
+  left: 54px;
 }
 
 .dur{
   color: white;
-  position: absolute;
-  top: 60px;
-  left: 1240px;
+  position: relative;
+  top: 58px;
+  right: 54px;
 }
 
 .slideer{
-  position: relative;
-  left: 300px;
-  top: 10px;
   background: grey;
   width: 100px;
   height: 3px;
@@ -420,6 +367,56 @@ private pausesong(){
 .slideer::-webkit-slider-thumb:hover{
   width: 10px;
   height: 10px;
+}
+
+#progressbar {
+  height: 2px;
+  position: absolute;
+  bottom: 20px;
+  background-color: rgb(116, 116, 116) ;
+  border-radius: 13px;
+  width: 42%;
+}
+
+#progressbar>div {
+  background-color: #ffeea9;
+  height: 3px;
+  border-radius: 20px;
+}
+
+.playbuttonfilled{
+  position: absolute;
+  bottom: 30px;
+}
+
+.nextskip{
+  position: relative;
+  left: 40px;
+  bottom: 12px;
+}
+
+.nextskipimg{
+  opacity: 0.7;
+  transition: 0.1s linear;
+}
+
+.nextskipimg:hover{
+  opacity: 1;
+}
+
+.prevskip{
+  position: relative;
+  right: 40px;
+  bottom: 12px;
+}
+
+.prevskipimg{
+  opacity: 0.7;
+  transition: 0.1s linear;
+}
+
+.prevskipimg:hover{
+  opacity: 1;
 }
 
 .queuebox{

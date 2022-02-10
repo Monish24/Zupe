@@ -35,7 +35,7 @@
       <div class="bottom-container">
         <div class="inner-bottom">
           <div class="trackcard" v-for="(res,index) in resAlbumsdetails.tracks.items" :key="res.key">
-            <div class="wrapper">
+            <!-- <div class="wrapper"> -->
               <div class="indexno">  
                 <span>{{index+1}}</span>
               </div>
@@ -48,7 +48,7 @@
               <div class="track-options">
                 •••
               </div>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </div>
@@ -215,7 +215,7 @@ body{
 
 .bgblur{
   background-image: url(https://i.scdn.co/image/ab67616d00001e02415b79227c6cee25f42fbf41);
-  background-size: 1860px 1860px;
+  background-size: 100vw 100vw;
   /* background-repeat: no-repeat;
   animation: marquee 30s infinite linear ; */
   filter: blur(10px);
@@ -331,9 +331,10 @@ body{
 }
 
 .bottom-container{
+  border: white 1px solid;
   overflow: scroll;
   overflow-x: hidden;
-  height: 490px;
+  height: 25.789vw;
 }
 
 .albums-options{
@@ -373,8 +374,7 @@ body{
 }
 
 .wrapper{
-  width: 1784px;
-  height: 56px;
+  height: 2.947vw;
 }
 
 .indexno{
@@ -382,14 +382,14 @@ body{
   vertical-align: middle;
   text-align: center;
   font-size: 14px;
-  width: 46px;
+  width: 2.421vw;
   height: 46px;
 }
 .trackname-container{
   display: table-cell;
   vertical-align: middle;
   text-align: left;
-  width: 1645px;
+  width: 84.5vw;
   height: 46px;
 }
 
@@ -397,7 +397,7 @@ body{
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  width: 80px;
+  width: 4.2vw;
   height: 46px;
 }
 
@@ -406,7 +406,7 @@ body{
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  width: 46px;
+  width: 2.421vw;
   height: 46px;
 }
 </style>

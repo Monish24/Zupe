@@ -232,15 +232,12 @@ body{
 }
 
 .wrapp{
-    height: 969px;
-    width: 100%;
     background: linear-gradient(to bottom, #D6E1ED, #DEE0F1);
 }
 
 .content-container{
     overflow: hidden;
-    position: relative;
-    left: 450px;
+    margin: 0px auto !important;
     background: white;
     width: 1000px;
     height: 969px;
