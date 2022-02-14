@@ -60,6 +60,17 @@ export default class Login extends Vue {
         this.upass=""
         vxm.playerStore.uid = this.uid
         console.log(vxm.playerStore.uid)
+        try {
+        const tmp = await fetch('http://localhost:3000/lib/uidinit3', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                uid: this.uid
+            })
+        })
+        } catch (e) {
+        console.log(e)
+        }
         this.$router.push('/dashboard')
     }
 }

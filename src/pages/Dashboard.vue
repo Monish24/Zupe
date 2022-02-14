@@ -130,10 +130,10 @@
                     </div>
                 </div>
                 <div class="cardsgrid">
-                    <carousel>
+                    
                     <div class="cardsgrid-g1">
                          <div class="cg-container" v-for="res in resnewReleases" :key="res.key" @click="displaythisPls(res.id)">
-                             <slide>
+
                              <span class="icg1">
                                  <img :src="res.images[0].url" height="270px" width="270px">
                              </span>
@@ -145,10 +145,9 @@
                                   {{ res.artists[0].name }}
                                 </span>
                              </div>
-                             </slide>
                          </div>
                     </div>
-                    </carousel>
+                    
                     <div class="cardsgrid-g2">
                         <div class="cg-container" v-for="res in resartistalbums" :key="res.key" @click="displaythisPls(res.id)">
                              <span class="icg1">

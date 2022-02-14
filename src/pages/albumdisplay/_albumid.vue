@@ -27,7 +27,7 @@
         <div class="buttons-upper">
           <button class="playbutton"><img src="@/assets/img/playtriangle.png" height="60px" width="60px" alt=""></button>
           <button class="playbutton"><img src="@/assets/img/shuffle.png" height="48px" width="48px" alt=""></button>
-          <div class="albums-options" @click="openoptions">
+          <div class="albums-options">
             •••
           </div>
         </div>
@@ -45,7 +45,7 @@
               <div class="track-duration">
               {{ getTime(res.duration_ms) }}
               </div>
-              <div class="track-options">
+              <div class="track-options" @click="addToLibrary(res.id,res.artists[0].id,resAlbumsdetails.id)">
                 •••
               </div>
             <!-- </div> -->
@@ -179,8 +179,17 @@ export default class albumdisplay extends Vue{
         //     console.log(e)
         // }
   }
-  private openoptions(){
-    
+  private async addToLibrary(songid:string,artistid:string,albumid:string){
+    console.log(songid,artistid,albumid)
+    const tmp = await fetch('http://localhost:3000/lib/getSong', {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+              song_id: songid,
+              artist_id: artistid,
+              album_id: albumid,
+          })
+      })
   }
   private format(inputDate:string) {
     var date = new Date(inputDate);

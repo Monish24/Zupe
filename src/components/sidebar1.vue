@@ -56,6 +56,9 @@
 
             </div>
             <div class="library-subcontainer">
+                <div class="zuplogo">
+                    <img src="@/assets/img/ZupeLogo.png" width="200px" alt="">
+                </div>
                 <div class="Home">
                 <router-link style="text-decoration: none; color: inherit;" to='/dashboard'>
                     <span class="img-home">
@@ -65,9 +68,11 @@
                 </router-link>
                 </div>
                 <div class="Library">
+                <router-link style="text-decoration: none; color: inherit;" to='/userLibrary'>
                     <span class="img-library">
                         <img src="@/assets/img/library.png">
                     </span>
+                </router-link>
                     <b>Library</b>
                 </div>
                 <div class="Search">
@@ -94,11 +99,13 @@
                     </span>
                 </transition>
                 </router-link>
+                <router-link style="text-decoration: none; color: inherit;" to='/userLibrary'>
                 <transition name="fade">
                     <span v-if="showImage" class="img-librarysb" key="2">
                         <img src="@/assets/img/library.png">
                     </span>
                 </transition>
+                </router-link>
                 <router-link style="text-decoration: none; color: inherit;" to='/searchboard'>
                 <transition name="fade">
                     <span v-if="showImage" key="3" class="img-searchsb" >
@@ -223,7 +230,7 @@ export default class sidebar1 extends Vue {
     width:220px;
     height: 40px;
     position: relative;
-    top: 20px;
+    top: 100px;
     right: 3px;
 }
 
@@ -243,7 +250,7 @@ export default class sidebar1 extends Vue {
     width:220px;
     height: 40px;
     position: relative;
-    top: 20px;
+    top: 100px;
     right: 3px;
 }
 
@@ -263,7 +270,7 @@ export default class sidebar1 extends Vue {
     width:220px;
     height: 40px;
     position: relative;
-    top: 20px;
+    top: 100px;
     right: 3px;
 }
 
@@ -323,7 +330,6 @@ export default class sidebar1 extends Vue {
     opacity: 0.6;
     position: fixed;
     left: 20px;
-    top: 26px;
 }
 
 .img-library{
@@ -333,7 +339,6 @@ export default class sidebar1 extends Vue {
     opacity: 0.6;
     position: fixed;
     left: 20px;
-    top: 67px;
 }
 
 .img-search{
@@ -465,4 +470,9 @@ export default class sidebar1 extends Vue {
   opacity: 0;
 }
 
+.zuplogo{
+    position: absolute;
+    top: 30px;
+    left: 10px;
+}
 </style>

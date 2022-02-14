@@ -64,6 +64,17 @@ export default class genreselect extends Vue{
         } catch (e) {
         console.log(e)
         }
+        try {
+        const tmp = await fetch('http://localhost:3000/lib/uidinit3', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                uid: this.uid
+            })
+        })
+        } catch (e) {
+        console.log(e)
+        }
         this.$nextTick(() => {
             try {
             fetch('http://localhost:3000/api/genre', {
