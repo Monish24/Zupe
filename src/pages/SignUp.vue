@@ -4,7 +4,7 @@
         <div class="signup-info-container">
             <div class="inputboxes-container">
                 <div class="create-text">
-                    Create account
+                    CREATE ACCOUNT
                 </div>
                 <div class="fn-container">
                     <div class="title">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="create-btn" @click="submitAction">Create account</button>
+                    <button class="create-btn" @click="submitAction">CREATE ACCOUNT</button>
                     <div class="cbtn-shadow"></div>
                 </div>
             </div>
