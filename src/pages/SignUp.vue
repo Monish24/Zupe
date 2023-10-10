@@ -8,9 +8,9 @@
                 </div>
                 <div class="fn-container">
                     <div class="title">
-                        First name
+                        FIRST NAME
                     </div>
-                    <input v-bind:style="{ color : textColor1, background : bgColor1, border : borderColor1  }" class="inp" v-model="fname" type="text" placeholder="Your first name">
+                    <input v-bind:style="{ color : textColor1, background : bgColor1, border : borderColor1  }" class="inp" v-model="fname" type="text" placeholder="Your FIRST NAME">
                     <div class="error-text">
                         <span v-for="error in fnameerrors" :key="error">
                             {{ error }}
