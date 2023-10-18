@@ -13,7 +13,7 @@ const RouterLayout = createRouterLayout((layout) => {
 
 console.log(routes)
 
-Component.registerhooks(['beforeRouteUpdate'])
+Component.registerHooks(['beforeRouteUpdate'])
 
 export default new Router({
   mode: process.env.IS_ELECTRON ? 'hash' : 'history',
