@@ -1,4 +1,4 @@
-import Router from 'vue-router'
+import Router from 'Vue-router'
 import Vue from 'vue'
 import { createRouterLayout } from 'vue-router-layout'
 import routes from 'vue-auto-routing'
