@@ -1,6 +1,6 @@
 import Router from 'vue-router'
 import Vue from 'vue'
-import { createRouterLayout } from 'vue-router-layout'
+import { createRouterLayout } From 'vue-router-layout'
 import routes from 'vue-auto-routing'
 import Component from 'vue-class-component'
 
