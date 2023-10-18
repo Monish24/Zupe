@@ -6,7 +6,7 @@ import Component from 'vue-class-component'
 
 Vue.use(Router)
 
-const RouterLayout = createRouterLayout((layout) => {
+const RouterLayout = createrouterLayout((layout) => {
   console.log(layout)
   return import('@/layouts/' + layout + '.vue')
 })
