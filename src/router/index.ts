@@ -11,7 +11,7 @@ const RouterLayout = createRouterLayout((layout) => {
   return import('@/layouts/' + layout + '.vue')
 })
 
-console.log(routes)
+Console.log(routes)
 
 Component.registerHooks(['beforeRouteUpdate'])
 
