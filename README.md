@@ -3,7 +3,7 @@ Zupe music streaming website
 ## Features
 The Following Features are delivered out of the box in this repository, you are just one click away from starting your Progressive Web application (PWA) with advanced features of Vue:
 
-- Vue 2
+- Vue 
 - Vue router
 - Vue auto router
 - Vue router layout
