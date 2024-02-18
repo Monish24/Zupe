@@ -46,7 +46,7 @@
 
 Feel free to contribute to the project by opening issues or submitting pull requests.
 
-## Website photos
+## Website Implementation
 
 ### Home Page
 ![image](https://github.com/Monish24/Zupe/assets/54630644/fb3bc5dc-7c7c-4605-a261-14dc91a472bc)
