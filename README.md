@@ -33,7 +33,6 @@
 - **Backend:** Node.js
 - **Database:** MySQL
 - **IDE:** Visual Studio Code
-- **Browser Support:** Google Chrome
 
 ## Getting Started
 
