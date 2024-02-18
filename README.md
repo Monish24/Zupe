@@ -1,4 +1,4 @@
-![image](https://github.com/Monish24/Zupe/assets/54630644/e9d67525-79e5-4a25-9248-ea794da4f7db)![image](https://github.com/Monish24/Zupe/assets/54630644/7b5e18d7-c218-4aad-866d-28665b4ed75c)# Zupe Music Streaming Website
+# Zupe Music Streaming Website
 
 "Zupe" is the perfect place to discover new music and new people simultaneously. This website allows users to listen to millions of songs, create a personalized music profile based on their tastes, and share it with the world. The focus is on connecting users through their music preferences, making it a unique platform for discovering both music and like-minded individuals.
 
