@@ -1,6 +1,6 @@
 # Zupe Music Streaming Website
 
-"Zupe" is the perfect place to discover new music and new people simultaneously. This website allows users to listen to millions of songs, create a personalized music profile based on their tastes, and share it with the world. The focus is on connecting users through their music preferences, making it a unique platform for discovering both music and like-minded individuals.
+"Zupe" is the perfect place to discover new music and new people simultaneously. This website allows users to listen to millions of songs, create a personalized music profile based on their tastes, and share it with the world. The focus is on connecting users through their music preferences, making it a unique platform for discovering both music and individuals with similar music taste.
 
 ## Features
 
